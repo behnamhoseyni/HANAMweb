@@ -1,13 +1,24 @@
 <?php
 
 namespace App;
-use Illuminate\Database\Eloquent\Model;
+
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
     use Sluggable;
+
     protected $guarded = [];
+
+    protected $casts = [
+        'images' => 'array'
+    ];
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
     public function sluggable()
     {
         return [
@@ -17,28 +28,19 @@ class Course extends Model
         ];
     }
 
-    public function path()
-    {
-        return "/Course/$this->slug";
-
-    }
-    protected $casts = [
-        'images' => 'array',
-
-    ];
-
-    public function user()
-    {
-        $this->belongsTo(User::class);
-    }
-    public function Episodes()
-    {
-        $this->hasMany(Episode::class);
-    }
-
     public function setBodyAttribute($value)
     {
         $this->attributes['description'] = str_limit(preg_replace('/<[^>]*>/', '', $value), 200);
         $this->attributes['body'] = $value;
+    }
+
+    public function episodes()
+    {
+        return $this->hasMany(Episode::class);
+    }
+
+    public function path()
+    {
+        return "/courses/$this->slug";
     }
 }

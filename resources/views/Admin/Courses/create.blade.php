@@ -52,7 +52,7 @@
                 <div class="col-sm-6">
                     <label for="price" class="control-label">قیمت</label>
                     <input type="text" class="form-control" name="price" id="price" placeholder="قیمت را واردکنید" value="{{ old('price') }}">
-                <input type="hidden" name="user_id" id="user_id" value="{{auth()->user()->id}}">
+                {{-- <input type="hidden" name="user_id" id="user_id" value="{{auth()->user()->id}}"> --}}
                 </div>
             </div>
             <div class="form-group">

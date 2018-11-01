@@ -27,8 +27,9 @@ class CourseController extends AdminController
 
     public function store(CourseRequest $request)
     {
+        $user = auth()->user()->id;
         $imageUrl = $this->uploadImages($request->file('images'));
-        Course::create(array_merge($request->all(), ['images' => $imageUrl]));
+        Course::create(array_merge($request->all(), ['images' => $imageUrl,'user_id' => $user]));
 
         return redirect(route('Courses.index'));
     }

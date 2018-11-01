@@ -27,10 +27,9 @@ class ArticleController extends AdminController
 
     public function store(ArticleRequest $request)
     {
-
+        $user=auth()->user()->id;
         $imageUrl=$this->uploadImages($request->file('images'));
-        Artile::create(array_merge($request->all(),['image' => $imageUrl]));
-
+        Article::create(array_merge($request->all(), ['images' => $imageUrl,'user_id' => $user]));
         return redirect(route('articles.index'));
     }
 

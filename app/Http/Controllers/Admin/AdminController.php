@@ -7,8 +7,6 @@ use App\Http\Controllers\Controller;
 use Intervention\Image\Facades\Image;
 use App\user;
 use App\Course;
-use Illuminate\Support\Carbon;
-
 
 class AdminController extends Controller
 {
@@ -58,7 +56,7 @@ class AdminController extends Controller
             $time=strlen($t) == 5 ? strtotime('00'.$t) : $t;
             $timestamp->addSecond($time);
         }
-        return $timestamp('H','i','s');
+        return $timestamp->format('H:i:s');
     }
 
 }

@@ -1,6 +1,8 @@
 @extends('Admin.master')
+
 @section('script')
     <script src="/ckeditor/ckeditor.js"></script>
+
       <script>
           CKEDITOR.replace('body',{
           filebrowserUploadUrl:'/admin/panel/upload-image',

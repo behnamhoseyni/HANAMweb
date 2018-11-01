@@ -6,31 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Episode extends Model
 {
+    protected $guarded = [];
 
-    public function sluggable()
+    public function course()
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        return $this->belongsTo(Course::class);
     }
 
     public function path()
     {
-        return "/Course/$this->slug";
-
+        return "/courses/{$this->course->slug}/episode/{$this->number}";
     }
-
-    public function Courses()
-    {
-        $this->belongsTo(Course::class);
-    }
-
-    public function setBodyAttribute($value)
-    {
-        $this->attributes['description'] = str_limit(preg_replace('/<[^>]*>/', '', $value), 200);
-        $this->attributes['body'] = $value;
-    }
-
 }
